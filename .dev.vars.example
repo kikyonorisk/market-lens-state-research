@@ -1,0 +1,8 @@
+MARKET_DATA_MODE=fuyao
+FUYAO_API_KEY=
+FUYAO_BASE_URL=https://fuyao.aicubes.cn
+IFIND_MARKET_AUTHORIZATION=
+IFIND_NEWS_AUTHORIZATION=
+AI_API_BASE_URL=https://api.deepseek.com
+AI_API_KEY=
+AI_MODEL=deepseek-flash

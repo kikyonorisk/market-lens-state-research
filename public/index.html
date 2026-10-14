@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f7f4">
+  <meta name="description" content="以可追溯数据理解 A 股市场状态、主要矛盾和判断改变条件。">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'none'; form-action 'self'">
+  <title>Market Lens｜市场大势研判</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#overview" aria-label="Market Lens 首页">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>market<span class="brand-light">lens</span></span>
+      </a>
+      <nav class="main-nav" aria-label="主导航">
+        <a class="active" href="#overview">市场总览</a><a href="#evidence">市场证据</a><a href="#research">继续研究</a>
+      </nav>
+      <div class="top-actions">
+        <span class="market-clock"><span class="clock-dot"></span><span id="market-clock">正在读取</span></span>
+        <button class="icon-button" id="refresh-button" type="button" aria-label="刷新市场数据" title="刷新数据">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16.2 7.2A6.7 6.7 0 0 0 4 5.5L2.8 7M2.8 7V3.8M2.8 7H6M3.8 12.8A6.7 6.7 0 0 0 16 14.5l1.2-1.5m0 0v3.2m0-3.2H14"/></svg>
+        </button>
+        <div class="avatar" aria-label="研究工作台">研</div>
+      </div>
+    </header>
+    <main>
+      <div id="data-banner" class="data-banner" role="status" hidden>
+        <span class="banner-icon">i</span><span id="banner-message"></span><span id="banner-mode" class="banner-mode"></span>
+      </div>
+      <section id="overview" class="welcome-row">
+        <div><p class="eyebrow"><span class="eyebrow-line"></span> MARKET PULSE <span id="as-of-date">—</span></p>
+          <h1>看清市场，<span>先看证据。</span></h1><p class="welcome-copy">把市场信号放在同一张图里，理解状态、分歧与判断边界。</p></div>
+        <div class="session-note"><span class="note-icon">◷</span><span>每日市场观察<br><small>收盘后更新 · 仅供研究</small></span></div>
+      </section>
+      <section class="state-panel" aria-labelledby="state-heading">
+        <div class="state-main">
+          <div class="state-topline"><span class="label-overline">当前市场状态</span><span class="state-chip" id="state-chip"><span class="state-chip-dot"></span><span id="state-chip-label">读取中</span></span></div>
+          <div class="state-title-row"><h2 id="state-heading">—</h2><span class="state-period" id="state-period">多维信号综合观察</span></div>
+          <p class="state-rationale" id="state-rationale">正在汇总市场证据…</p>
+          <div class="state-meta">
+            <div class="confidence-block"><div class="confidence-heading"><span>研判置信度</span><strong id="confidence-text">—</strong></div><div class="confidence-track"><span id="confidence-bar"></span></div><small>反映数据完整度与信号一致性，不代表预测准确率</small></div>
+            <div class="meta-divider"></div>
+            <div class="updated-block"><span class="meta-icon">↻</span><span><small>数据截至</small><strong id="updated-at">—</strong></span></div>
+          </div>
+        </div>
+        <div class="state-aside"><div class="aside-orbit orbit-one"></div><div class="aside-orbit orbit-two"></div>
+          <div class="state-aside-content"><span class="aside-kicker">MARKET LENS VIEW</span><div class="pulse-ring"><span class="pulse-core"></span><span class="pulse-wave"></span></div>
+            <p id="state-aside-copy">多维信号交叉验证</p><span id="coverage-label" class="coverage-tag">核心维度 0 / 5</span></div><span class="aside-index">01 <i>/</i> 05</span>
+        </div>
+      </section>
+      <section class="index-strip" aria-label="主要指数"><div class="strip-label"><span class="strip-dot"></span>主要指数</div><div id="index-list" class="index-list"><div class="index-skeleton"></div><div class="index-skeleton"></div><div class="index-skeleton"></div></div></section>
+      <section class="section-heading" id="evidence">
+        <div><p class="eyebrow"><span class="eyebrow-line"></span> EVIDENCE MAP</p><h2>市场证据</h2></div>
+        <div class="heading-right"><span class="fact-key"><i class="key-fact"></i>数据事实</span><span class="fact-key"><i class="key-inference"></i>规则归纳</span><span class="view-all">7 个观察维度</span></div>
+      </section>
+      <div class="dashboard-grid">
+        <div class="main-column">
+          <div id="evidence-grid" class="evidence-grid" aria-live="polite"></div>
+          <section class="chart-card">
+            <div class="chart-top"><div><span class="chart-overline">MARKET STRUCTURE</span><h3>指数走势观察</h3></div>
+              <div id="chart-legend" class="chart-legend"><span><i class="legend-line legend-blue"></i>沪深 300</span><span><i class="legend-line legend-orange"></i>中证 1000</span><span><i class="legend-line legend-green"></i>创业板指</span></div></div>
+            <div class="chart-summary" id="chart-summary">指数走势展示需等待数据。</div><div class="chart-wrap"><canvas id="index-chart" aria-label="主要指数走势对比图" role="img"></canvas><div id="chart-empty" class="chart-empty" hidden>当前没有可绘制的指数历史数据。</div></div>
+            <div class="chart-foot"><span><i class="chart-source-dot"></i><span id="chart-source">数据来源待确认</span></span><span>指数按首日 = 100 归一化 · 不代表收益比较</span></div>
+          </section>
+        </div>
+        <aside class="side-column">
+          <section class="tension-card"><div class="side-card-heading"><span class="icon-tension">✳</span><span class="side-label">主要矛盾</span><span class="side-label-en">KEY TENSION</span></div>
+            <p class="tension-copy" id="major-tension">—</p><div class="tension-separator"></div><div class="tension-foot"><span class="inference-pill"><i></i>规则归纳</span><button class="text-button" data-open-assessment type="button">查看推导 <span>↗</span></button></div></section>
+          <section class="switch-card"><div class="side-card-heading"><span class="switch-icon">↗</span><span class="side-label">什么会改变判断？</span></div>
+            <p class="switch-intro">这些条件出现时，应重新检视当前状态。</p><ul id="switch-list" class="switch-list"></ul><div class="switch-foot"><span class="uncertainty-mark">?</span>观察条件，不是行情预测</div></section>
+          <section class="trace-card"><div class="trace-top"><div class="trace-symbol">⌁</div><div><strong>每个结论都能回到数据</strong><small>来源 · 字段 · 时点 · 口径</small></div></div><button type="button" class="trace-link" id="open-trace">打开证据溯源 <span>→</span></button></section>
+        </aside>
+      </div>
+      <section class="research-section" id="research">
+        <div class="research-intro"><p class="eyebrow"><span class="eyebrow-line"></span> CONTINUE RESEARCH</p><h2>从一个问题，<br><span>继续往下研究。</span></h2>
+          <p>先生成取数计划，再基于当前证据回答。缺少数据时会直接说明。</p>
+          <div class="research-boundary"><span>AI 研究边界</span><span>不预测涨跌</span><span>不推荐个股</span><span>不提供仓位建议</span></div></div>
+        <div class="research-workspace">
+          <div class="research-window-top"><span class="window-dots"><i></i><i></i><i></i></span><span>MARKET RESEARCH ASSISTANT</span><span id="ai-mode-tag" class="ai-mode-tag">尚未调用</span></div>
+          <form id="research-form" class="research-form"><label class="sr-only" for="research-question">输入市场研究问题</label>
+            <textarea id="research-question" maxlength="500" rows="2" placeholder="例如：为什么指数稳定，但小盘股偏弱？"></textarea>
+            <div class="research-form-bottom"><span><i class="input-sparkle">✳</i> 先计划取数，再组织证据</span><button id="research-submit" type="submit">开始研究 <span>↗</span></button></div></form>
+          <div class="prompt-chips" aria-label="问题示例"><button type="button" data-prompt="为什么指数稳定，但小盘风格偏弱？">小盘风格为何偏弱？ <span>↗</span></button><button type="button" data-prompt="如果市场宽度继续收缩，判断会如何变化？">宽度收缩意味着什么？ <span>↗</span></button><button type="button" data-prompt="回看最近的流动性变化">查看流动性变化 <span>↗</span></button></div>
+          <div id="research-result" class="research-result" hidden aria-live="polite"></div>
+        </div>
+      </section>
+      <footer class="page-footer"><a class="footer-brand" href="#overview"><span class="brand-mark small" aria-hidden="true"><i></i><i></i><i></i></span> Market Lens</a>
+        <span>证据驱动的市场观察 · <span id="footer-year"></span></span><span class="footer-disclaimer">仅供研究参考，不构成投资建议。</span></footer>
+    </main>
+  </div>
+  <div id="drawer-backdrop" class="drawer-backdrop" hidden></div>
+  <aside id="evidence-drawer" class="evidence-drawer" aria-labelledby="drawer-title" aria-modal="true" role="dialog" hidden>
+    <div class="drawer-header"><div><span class="drawer-overline">EVIDENCE TRACE</span><h2 id="drawer-title">证据溯源</h2></div><button class="icon-button close-drawer" id="close-drawer" type="button" aria-label="关闭证据面板">×</button></div>
+    <p class="drawer-description">从已展示的归纳结论回到原始字段，核对来源、时间与计算口径。</p><div id="drawer-content" class="drawer-content"></div>
+    <div class="drawer-disclaimer"><span class="uncertainty-mark">?</span> 对缺失、过期或来源冲突的数据，不生成正常结论。</div>
+  </aside>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
